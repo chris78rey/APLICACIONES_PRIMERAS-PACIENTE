@@ -1,0 +1,258 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../template/Template.xhtml">
+
+            <ui:define name="west">
+                west
+            </ui:define>
+            <ui:define name="emenu"/>
+            <ui:define name="center">
+                <f:view>
+
+                    <h:panelGrid width="10000px">
+                        <h:form>
+                            <h1><h:outputText value="List"/></h1>
+                            <p:dataTable style="font-size: 13px;width: 100%"  value="#{portalServiciosDocMB.lposer}" var="item">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Id"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.id}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Proyecto"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.proyecto}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Completado"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.completado}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Reutilizable"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.reutilizable}"/>
+                                </p:column>
+                                <p:column >
+                                    <f:facet name="header">
+                                        <h:outputText value="PalabrasClave"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.palabrasClave}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Estado"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.estado}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Orden"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.orden}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Prioridad"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.prioridad}"/>
+                                </p:column>
+                                <p:column style="width: 400px">
+                                    <f:facet name="header">
+                                        <h:outputText value="Documentacion"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.documentacion}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Jsf"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.jsf}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Mbean"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.mbean}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="J2ee"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.j2ee}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Ezcomp"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.ezcomp}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Archivo"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.archivo}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Dato"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.dato}">
+                                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                    </h:outputText>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Borradores"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.borradores}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Distractor"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.distractor}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Util001"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.util001}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Util002"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.util002}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Util003"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.util003}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Util004"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.util004}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Util005"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.util005}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Util006"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.util006}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Util007"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.util007}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Util008"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.util008}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Util009"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.util009}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Util010"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.util010}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Util011"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.util011}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Util012"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.util012}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Util013"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.util013}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Util014"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.util014}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Util015"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.util015}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Util016"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.util016}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Util017"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.util017}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Util018"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.util018}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Util019"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.util019}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Util020"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.util020}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </h:panelGrid>
+                </f:view>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

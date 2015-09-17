@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CertificadoMedico" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9b94ab19-0770-4332-97a5-f8aa79943fb6">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="hc" class="java.lang.String">
+		<defaultValueExpression><![CDATA["0"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numeroCertificado" class="java.lang.String">
+		<defaultValueExpression><![CDATA["0"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sello" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[/* Formatted on 21/04/2015 10:11:28 (QP5 v5.252.13127.32867) */
+SELECT NUMERO,
+       PACIENTES.CEDULA,
+       PRIMER_NOMBRE,
+       SEGUNDO_NOMBRE,
+       APELLIDO_PATERNO,
+       APELLIDO_MATERNO,
+       PERSONAL.CEDULA PERSONAL_CEDULA,
+       PERSONAL.NOMBRES,
+       PERSONAL.APELLIDOS,
+       PERSONAL.CODIGO,
+       ENFERMEDAD,
+       ENFERMEDADES.CODIGO ENFERMEDADES_CODIGO,
+       TO_CHAR (FECHA, 'dd/mm/yyyy') FECHA,
+       TO_CHAR (FECHA_INICIO_REPOSO, 'dd/mm/yyyy') FECHA_INICIO_REPOSO,
+       TO_CHAR (FECHA_FIN_REPOSO, 'dd/mm/yyyy') FECHA_FIN_REPOSO,
+       FECHA_RE_EVALUACION,
+       ANTECEDENTES_CLINICOS,
+       ANTECEDENTES_PERSONALES,
+       ANTECEDENTES_FAMILIARES,
+       ANTECEDENTES_POSTQUIRURGICOS,
+       ENFERMEDAD_ACTUAL,
+       IMPRESION_DIAGNOSTICA,
+       TRATAMIENTO,
+       PRONOSTICO,
+       RECOMENDACIONES,
+       SERVICIO,
+       RV_MEANING,
+       DECODE (TIPO_TRATAMIENTO,
+               'C', 'Clínico',
+               'Q', 'Quirúrgico',
+               'O', 'Oncológico',
+               'D', 'Diálisis',
+               'F', 'Fisiatría',
+               'T', 'Ortopédico',
+               'SIN DATO')
+          TIPO_TRATAMIENTO,
+       DIAS_PERMISO,
+       DECODE (REPOSO_FISICO,
+               'E', 'Estricto',
+               'R', 'Relativo',
+               'N', 'Ninguno',
+               'SIN DATO')
+          REPOSO_FISICO,
+       NVL (TO_CHAR (FECHA_INGRESO, 'dd/mm/yyyy'), ' ') FECHA_INGRESO,
+       NVL (TO_CHAR (FECHA_EGRESO, 'dd/mm/yyyy'), ' ') FECHA_EGRESO,
+       OBSERVACIONES,
+       JEFE_RRHH,
+       CARGO_JEFE_RRHH,
+       COMANDANTE,
+       CARGO_COMANDANTE,
+       CERTIFICADOS.PRS_CODIGO emite_certi,
+       PERSONAL_1.CEDULA PERSONAL_1_CEDULA,
+       PERSONAL_1.NOMBRES PERSONAL_1_NOMBRES,
+       PERSONAL_1.APELLIDOS PERSONAL_1_APELLIDOS,
+       (SELECT NOMBRE
+          FROM SIS.DEPARTAMENTOS_TRABAJAN, SIS.DEPARTAMENTOS
+         WHERE     PRS_CODIGO = CERTIFICADOS.PRS_CODIGO
+               AND ARA_CODIGO = DPR_ARA_CODIGO
+               AND CODIGO = DPR_CODIGO
+               AND ROWNUM = 1)
+          departamento,
+       CERTIFICADOS.PCN_NUMERO_HC,
+       (SELECT ESSP.ESPECIALIDAD
+          FROM SIS.ESPECIALIDADES ESSP
+         WHERE ESSP.CODIGO = ESP_CODIGO AND ROWNUM = 1)
+          ESPECIALIDAD,
+       (FECHA_FIN_REPOSO + 1 - FECHA_INICIO_REPOSO) DIAS_REPOSO,
+       (CASE
+           WHEN (FECHA_FIN_REPOSO - FECHA_INICIO_REPOSO) <> 0
+           THEN
+                 'Por prescripción médica de reposo, no puede concurrir a su trabajo desde el '
+              || TO_CHAR (FECHA_INICIO_REPOSO, 'dd/mm/yyyy')
+              || ', hasta el '
+              || TO_CHAR (FECHA_FIN_REPOSO, 'dd/mm/yyyy')
+           ELSE
+              ' '
+        END)
+          FECHAS_DESCANZO
+  FROM SIS.CERTIFICADOS,
+       SIS.PACIENTES,
+       SIS.PERSONAL,
+       SIS.DIAGNOSTICOS_PACIENTE,
+       SIS.ENFERMEDADES,
+       SIS.CG_REF_CODES,
+       SIS.PERSONAL PERSONAL_1
+ WHERE
+
+         CERTIFICADOS.PCN_NUMERO_HC = $P{hc}
+       AND NUMERO =$P{numeroCertificado}  and
+       RV_DOMAIN = 'SERVICIO PERMANENCIA'
+       AND ENFERMEDADES.CODIGO = ENF_CODIGO
+       AND RV_LOW_VALUE = SERVICIO
+       AND PERSONAL_1.CODIGO = CERTIFICADOS.PRS_CODIGO
+       AND NUMERO_HC = CERTIFICADOS.PCN_NUMERO_HC
+       AND PRS_CODIGO_TRATANTE = PERSONAL.CODIGO
+       AND DGNPCN_DGNPCN_ID = DGNPCN_ID]]>
+	</queryString>
+	<field name="NUMERO" class="java.math.BigDecimal"/>
+	<field name="CEDULA" class="java.lang.String"/>
+	<field name="PRIMER_NOMBRE" class="java.lang.String"/>
+	<field name="SEGUNDO_NOMBRE" class="java.lang.String"/>
+	<field name="APELLIDO_PATERNO" class="java.lang.String"/>
+	<field name="APELLIDO_MATERNO" class="java.lang.String"/>
+	<field name="PERSONAL_CEDULA" class="java.lang.String"/>
+	<field name="NOMBRES" class="java.lang.String"/>
+	<field name="APELLIDOS" class="java.lang.String"/>
+	<field name="CODIGO" class="java.lang.String"/>
+	<field name="ENFERMEDAD" class="java.lang.String"/>
+	<field name="ENFERMEDADES_CODIGO" class="java.lang.String"/>
+	<field name="FECHA" class="java.lang.String"/>
+	<field name="FECHA_INICIO_REPOSO" class="java.lang.String"/>
+	<field name="FECHA_FIN_REPOSO" class="java.lang.String"/>
+	<field name="FECHA_RE_EVALUACION" class="java.sql.Timestamp"/>
+	<field name="ANTECEDENTES_CLINICOS" class="java.lang.String"/>
+	<field name="ANTECEDENTES_PERSONALES" class="java.lang.String"/>
+	<field name="ANTECEDENTES_FAMILIARES" class="java.lang.String"/>
+	<field name="ANTECEDENTES_POSTQUIRURGICOS" class="java.lang.String"/>
+	<field name="ENFERMEDAD_ACTUAL" class="java.lang.String"/>
+	<field name="IMPRESION_DIAGNOSTICA" class="java.lang.String"/>
+	<field name="TRATAMIENTO" class="java.lang.String"/>
+	<field name="PRONOSTICO" class="java.lang.String"/>
+	<field name="RECOMENDACIONES" class="java.lang.String"/>
+	<field name="SERVICIO" class="java.lang.String"/>
+	<field name="RV_MEANING" class="java.lang.String"/>
+	<field name="TIPO_TRATAMIENTO" class="java.lang.String"/>
+	<field name="DIAS_PERMISO" class="java.math.BigDecimal"/>
+	<field name="REPOSO_FISICO" class="java.lang.String"/>
+	<field name="FECHA_INGRESO" class="java.lang.String"/>
+	<field name="FECHA_EGRESO" class="java.lang.String"/>
+	<field name="OBSERVACIONES" class="java.lang.String"/>
+	<field name="JEFE_RRHH" class="java.lang.String"/>
+	<field name="CARGO_JEFE_RRHH" class="java.lang.String"/>
+	<field name="COMANDANTE" class="java.lang.String"/>
+	<field name="CARGO_COMANDANTE" class="java.lang.String"/>
+	<field name="EMITE_CERTI" class="java.lang.String"/>
+	<field name="PERSONAL_1_CEDULA" class="java.lang.String"/>
+	<field name="PERSONAL_1_NOMBRES" class="java.lang.String"/>
+	<field name="PERSONAL_1_APELLIDOS" class="java.lang.String"/>
+	<field name="DEPARTAMENTO" class="java.lang.String"/>
+	<field name="PCN_NUMERO_HC" class="java.math.BigDecimal"/>
+	<field name="ESPECIALIDAD" class="java.lang.String"/>
+	<field name="DIAS_REPOSO" class="java.math.BigDecimal"/>
+	<field name="FECHAS_DESCANZO" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="155" splitType="Stretch">
+			<staticText>
+				<reportElement x="115" y="133" width="312" height="20" uuid="732f1184-67f8-4c8e-bfe3-f5d5a3e96d4b"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[CERTIFICADO MÉDICO]]></text>
+			</staticText>
+			<image>
+				<reportElement x="218" y="17" width="99" height="65" uuid="279f3ef1-5a3f-454a-9f35-d1388b4e9ea1"/>
+				<imageExpression><![CDATA[$P{sello}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="55" y="82" width="429" height="21" uuid="3f33e223-247e-4d82-801e-05a527865a76"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[COMANDO CONJUNTO DE LAS FUERZAS ARMADAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="115" y="113" width="312" height="20" uuid="521e527a-402a-41f6-a76b-63cf4b7f8a2c"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[HOSPITAL DE ESPECIALIDADES FF.AA. N°1]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="558" splitType="Stretch">
+			<textField>
+				<reportElement x="168" y="507" width="249" height="20" uuid="c338b151-1625-41fc-b2a2-9c187aeb8869"/>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA["DR(A) "+$F{APELLIDOS}+" " +$F{NOMBRES}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="71" y="13" width="403" height="1" uuid="ceeaaf54-af81-43f9-a591-9acf1da88c9d"/>
+			</line>
+			<staticText>
+				<reportElement x="200" y="527" width="157" height="20" uuid="9b46e7ef-65d5-4b61-93b6-e87527f086e8"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[MEDICO TRATANTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="81" y="269" width="137" height="20" uuid="47185f6d-b087-4ef8-865f-5ab651bfa099"/>
+				<text><![CDATA[REPOSO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="255" y="269" width="217" height="20" uuid="5efd54de-a223-4cac-964c-507ac50e1964"/>
+				<textFieldExpression><![CDATA[$F{REPOSO_FISICO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="81" y="343" width="91" height="20" uuid="aba82e75-4a57-40ed-9a7f-60aac67e372b"/>
+				<text><![CDATA[FECHA INGRESO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="255" y="343" width="217" height="20" uuid="f6671722-8c1d-49e0-92b4-f5df06413a1d"/>
+				<textFieldExpression><![CDATA[$F{FECHA_INGRESO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="81" y="375" width="105" height="20" uuid="7c156de4-bb94-4236-b1e6-f07556d9a78d"/>
+				<text><![CDATA[FECHA EGRESO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="255" y="375" width="217" height="20" uuid="bec84ba8-6e2a-4d85-b3de-180bcd09cdfd"/>
+				<textFieldExpression><![CDATA[$F{FECHA_EGRESO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="81" y="407" width="100" height="20" uuid="cb34b6d4-6789-496e-a7a4-6a336eddb30d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[OBSERVACIONES:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="81" y="427" width="391" height="51" uuid="8d05efca-6e92-4731-bb1b-75729238919d"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{OBSERVACIONES}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="81" y="148" width="137" height="20" uuid="bf62b7cb-6a08-463a-b1f2-9a959e3ec63a"/>
+				<text><![CDATA[DIAGNÓSTICO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="255" y="148" width="217" height="34" uuid="095b0341-5f1f-459d-84d7-feb1b69f387e"/>
+				<textFieldExpression><![CDATA[$F{ENFERMEDAD}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="81" y="182" width="137" height="20" uuid="5bf90ee0-2820-49d2-9e94-3e84e1bc65a1"/>
+				<text><![CDATA[COD CIE10:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="255" y="182" width="217" height="20" uuid="cd20c8c7-2f5d-4e2e-8e7d-1bf8c3285e87"/>
+				<textFieldExpression><![CDATA[$F{ENFERMEDADES_CODIGO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="81" y="202" width="137" height="20" uuid="1e55e635-31ce-4582-8839-74eab417ed99"/>
+				<text><![CDATA[TRATAMIENTO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="255" y="202" width="217" height="20" uuid="8a89eb18-661b-435b-93dc-caf7088ba7c2"/>
+				<textFieldExpression><![CDATA[$F{TIPO_TRATAMIENTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="81" y="222" width="391" height="27" uuid="ff348f37-912f-46d5-8a38-1f55ef79e001"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FECHAS_DESCANZO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="81" y="249" width="137" height="20" uuid="18ce3614-7999-46b8-809f-ffb4d25e16c2"/>
+				<text><![CDATA[DIAS DE REPOSO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="255" y="249" width="217" height="20" uuid="c3850dfd-cc32-4d22-9507-57b22fe33b89"/>
+				<textFieldExpression><![CDATA[$F{DIAS_REPOSO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="81" y="293" width="137" height="20" uuid="57258e1e-c97f-43c3-8117-d248bc8030fc"/>
+				<text><![CDATA[CEDULA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="255" y="293" width="217" height="20" uuid="1a8c3e5f-cf4d-4b8c-afc1-e8464a80ae26"/>
+				<textFieldExpression><![CDATA[$F{CEDULA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="81" y="313" width="137" height="20" uuid="af93580a-2250-4ccf-822c-8914c3846fbe"/>
+				<text><![CDATA[ESPECIALIDAD]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="257" y="313" width="217" height="20" uuid="bf2d2945-507d-47c3-a642-a57ba5f4512c"/>
+				<textFieldExpression><![CDATA[$F{ESPECIALIDAD}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="81" y="49" width="137" height="20" uuid="845daaf4-ce7f-49ed-b56e-413d6610ed0b"/>
+				<text><![CDATA[HISTORIA CLÍNICA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="255" y="49" width="217" height="20" uuid="3b0ea162-93df-46fc-8b1b-50972cbaf68e"/>
+				<textFieldExpression><![CDATA[$F{PCN_NUMERO_HC}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="81" y="80" width="137" height="20" uuid="8855b0ba-9180-4adf-9e98-45c6cc6c0c48"/>
+				<text><![CDATA[APELLIDOS:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="255" y="80" width="217" height="20" uuid="bd54e00a-1122-41d3-be32-07e05cc76536"/>
+				<textFieldExpression><![CDATA[$F{APELLIDO_PATERNO} +" " + $F{APELLIDO_MATERNO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="81" y="100" width="137" height="20" uuid="251a06ce-4e1b-43d0-ab1d-3266f8788693"/>
+				<text><![CDATA[NOMBRES:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="255" y="100" width="217" height="20" uuid="31306167-57bd-48a8-8ac4-fed2da343d6a"/>
+				<textFieldExpression><![CDATA[$F{PRIMER_NOMBRE} + " " + $F{SEGUNDO_NOMBRE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="81" y="29" width="137" height="20" uuid="51763cb1-782c-4f17-b7a6-914f61edec86"/>
+				<text><![CDATA[NUMERO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="255" y="29" width="217" height="20" uuid="d8c3ada7-c8c6-4395-a80e-854795aa4d0a"/>
+				<textFieldExpression><![CDATA[$F{NUMERO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

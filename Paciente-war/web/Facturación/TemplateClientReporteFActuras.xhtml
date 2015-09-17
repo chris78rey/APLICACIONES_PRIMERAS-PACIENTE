@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../template/Template.xhtml">
+
+
+
+            <ui:define name="center">
+                <h:form>
+                    <h:panelGrid width="66%" columns="1">
+                        <h:panelGroup>
+                            <p:dataTable  value="#{factura.listaFacturasPorHC}" var="item">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText style="font: sans-serif;font-size: x-small" value="RUC"/>
+                                    </f:facet>
+                                    <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.RUC}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText style="font: sans-serif;font-size: x-small" value="NRO_FACT"/>
+                                    </f:facet>
+                                    <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.NRO_FACT}"/>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText style="font: sans-serif;font-size: x-small" value="FECHA_EMISION"/>
+                                    </f:facet>
+                                    <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.FECHA_EMISION}"/>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText style="font: sans-serif;font-size: x-small" value="ID"/>
+                                    </f:facet>
+                                    <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.CODIGO}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText style="font: sans-serif;font-size: x-small;text-align: right  " value="VALOR_CANCELADO"/>
+                                    </f:facet>
+                                    <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.VALOR_CANCELADO}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText style="font: sans-serif;font-size: x-small;text-align: right  " value="PDF"/>
+                                    </f:facet>
+                                    <h:commandLink target="_blank" style="font-size: 13px;" value="PDF"  action="#{factura.buscaIDFactura(item.CODIGO, item.FCT_CAJA)}"/>
+
+                                </p:column>
+                            </p:dataTable>
+
+
+
+                        </h:panelGroup>
+                    </h:panelGrid>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+        <ui:composition template="./../template/Template.xhtml">
+            <ui:define name="center">
+                <h3>
+                    TURNOS PARA PRIMERA CITA
+                </h3>
+                <p:progressBar id="progressBarClient" style="width:300px"/>
+                <p:dataTable style="font-size: 13px;width: 50%" rows="7" paginator="true"  value="#{proxima.listaturnossiguientes}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="NOMBRE"/>
+                        </f:facet>
+                        <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.NOMBRE}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="FECHA_DISPONIBLE"/>
+                        </f:facet>
+                        <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.FECHA_DISPONIBLE}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="CONSULTORIO"/>
+                        </f:facet>
+                        <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.CONSULTORIO}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="TURNOS DISPONIBLES"/>
+                        </f:facet>
+                        <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.DISPONIBLES}"/>
+                    </p:column>
+                </p:dataTable>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

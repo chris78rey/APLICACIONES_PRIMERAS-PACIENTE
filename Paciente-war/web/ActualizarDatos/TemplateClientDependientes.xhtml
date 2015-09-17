@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../template/Template.xhtml">
+
+            <ui:define name="center">
+
+                <h1><h:outputText value="Cobertura ISSFA"/></h1>
+
+
+
+                <p:panelGrid style="font-size: 13px;width: 90%"    columns="2" >
+
+                    <h:outputText style="font: sans-serif;font-size:  13px;" value="Fuerza:"/>
+                    <h:outputText style="font: sans-serif;font-size: 13px;text-align: right" value="#{dependientes.fuerza}"/>
+                    <h:outputText style="font: sans-serif;font-size: 13px;" value="Grado:"/>
+                    <h:outputText style="font: sans-serif;font-size: 13px;text-align: right" value="#{dependientes.grado}"/>
+                    <h:outputText style="font: sans-serif;font-size: 13px;" value="Tipo:"/>
+                    <h:outputText style="font: sans-serif;font-size: 13px;text-align: right" value="#{dependientes.tipoDependencia}"/>
+                    <h:outputText style="font: sans-serif;font-size: 13px;" value="Cédula:"/>
+                    <h:outputText style="font: sans-serif;font-size: 13px;text-align: right" value="#{dependientes.CC}"/>
+                    <h:outputText style="font: sans-serif;font-size: 13px;" value="Nombres:"/>
+                    <h:outputText style="font: sans-serif;font-size: 13px;text-align: right" value="#{dependientes.nombre}"/>
+
+                    <h:outputText style="font: sans-serif;font-size: 13px;" value="Apellidos:"/>
+                    <h:outputText style="font: sans-serif;font-size: 13px;text-align: right" value="#{dependientes.apell}"/>
+         
+                    <h:outputText style="font: sans-serif;font-size: 13px;" value="HC:"/>
+                    <h:outputText style="font: sans-serif;font-size: 13px;text-align: right" value="#{dependientes.HC}"/>
+                    <h:outputText style="font: sans-serif;font-size: 13px;" value="Género:"/>
+                    <h:outputText style="font: sans-serif;font-size: 13px;text-align: right" value="#{dependientes.genero}"/>
+                
+                    <h:outputText style="font: sans-serif;font-size: 13px;" value="Email:"/>
+                    <h:outputText style="font: sans-serif;font-size: 13px;text-align: right" value="#{dependientes.email}"/>
+                    <h:outputText style="font: sans-serif;font-size: 13px;" value="ISSFA Titular:"/>
+                    <h:outputText style="font: sans-serif;font-size: 13px;text-align: right" value="#{dependientes.IDISSFATitular}"/>
+                    <h:outputText style="font: sans-serif;font-size: 13px;" value="Teléfono:"/>
+                    <h:outputText style="font: sans-serif;font-size: 13px;text-align: right" value="#{dependientes.telefono}"/>
+                    <h:outputText style="font: sans-serif;font-size: 13px;" value="Celular:"/>
+                    <h:outputText style="font: sans-serif;font-size: 13px;text-align: right" value="#{dependientes.celular}"/>
+
+                </p:panelGrid>
+                <h1><h:outputText value="Relacionados"/></h1>
+                <p:dataTable  style="font-size: 13px;width: 90%"  value="#{dependientes.listaBuscaDependientes}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="TIPO"/>
+                        </f:facet>
+                        <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.TIPO_DEPENDENCIA}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="CATEGORIA"/>
+                        </f:facet>
+                        <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.CATEG_PACIENTE}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="CEDULA"/>
+                        </f:facet>
+                        <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.CEDULA}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="HC"/>
+                        </f:facet>
+                        <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.NUMERO_HC}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="NOMBRE"/>
+                        </f:facet>
+                        <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.PRIMER_NOMBRE}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="APELLIDO"/>
+                        </f:facet>
+                        <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.APELLIDO_PATERNO}"/>
+                    </p:column>
+                    <p:column width="150px">
+                        <f:facet name="header">
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="EMAIL"/>
+                        </f:facet>
+                        <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.EMAIL}"/>
+                    </p:column>
+       
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="TELEFONO"/>
+                        </f:facet>
+                        <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.TELEFONO}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="CELULAR"/>
+                        </f:facet>
+                        <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.TELEFONO_TRABAJO}"/>
+                    </p:column>
+
+
+                </p:dataTable>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../template/Template.xhtml">
+
+
+
+            <ui:define name="center">
+                <h:form id="form1" >
+                    <br/>
+                    <h1><h:outputText value="Turnos pendientes"/></h1>
+                    
+                    <p:dataTable id="tbl"  style="width: 66%"  value="#{hturno.listaf}" var="item">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText style="font: sans-serif;font-size: x-small" value="ESPECIALIDAD"/>
+                            </f:facet>
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.APELLIDOS}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText style="font: sans-serif;font-size: x-small" value="CONSULTORIO"/>
+                            </f:facet>
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.NOMBRES}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText style="font: sans-serif;font-size: x-small" value="ESTADO"/>
+                            </f:facet>
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.ESTADO}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText style="font: sans-serif;font-size: x-small" value="FECHAS"/>
+                            </f:facet>
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.FECHAS}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText style="font: sans-serif;font-size: x-small" value="NUMERO DE TURNO"/>
+                            </f:facet>
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.NUMERO}"/>
+                        </p:column>
+
+
+                    </p:dataTable>
+
+
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

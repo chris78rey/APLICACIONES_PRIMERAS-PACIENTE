@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../template/Template.xhtml">
+ 
+            <ui:define name="center">
+                <h:form id="f1">
+                    <p:growl id="message" showDetail="true" />
+                    <h1><h:outputText value="Cambiar Clave"/></h1>
+                    <br/>
+                    <br/>
+
+                    <p:panelGrid style="font-size: 13px;width: 0%"   columns="2"  >
+
+                        <h:outputText style="font-size: 13px;"  value="Por Favor digite la clave anterior:" />
+                        <p:password style="font-size: 13px;" value="#{datosPaciente.clave}" readonly="false"  size="16"/>
+                        <h:outputText style="font-size: 13px;"  value="Por Favor digite la nueva clave:" />
+                        <p:password style="font-size: 13px;" value="#{datosPaciente.clavenueva}" readonly="false" size="16"/>
+                        <h:outputText style="font-size: 13px;"  value="Por Favor digite la nueva clave para confirmar:" />
+                        <p:password style="font-size: 13px;" value="#{datosPaciente.clavenueva2}" readonly="false" size="16"/>
+
+
+                    </p:panelGrid>
+                    <p:commandButton   style="font-size: 13px;"  actionListener="#{datosPaciente.cambiarClave()}" update="message"  value="Cambiar">
+                        <p:confirm header="Confirma el cambio?" message="Esta Seguro?" icon="ui-icon-alert" />
+                    </p:commandButton>
+
+
+                    <p:confirmDialog style="font-size: 10px;"  global="true" showEffect="fade" hideEffect="explode">
+                        <p:commandButton value="Sí" style="font-size: 10px;" update=":formatemplatecenter:pg1:"  type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="No" style="font-size: 10px;" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

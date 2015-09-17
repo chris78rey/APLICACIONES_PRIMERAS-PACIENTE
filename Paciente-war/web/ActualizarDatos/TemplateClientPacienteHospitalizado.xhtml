@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template/Template.xhtml">
+
+
+
+            <ui:define name="center">
+                <h:form id="f1">
+                    <p:growl id="msgs" showDetail="true" />
+                     <h1><h:outputText value="Hospitalización"/></h1>
+                    
+
+                    <p:commandLink id="cl1" style="font-size: 13px;text-align: left"  update="d1" title="View" value="Buscar por  fechas:" oncomplete="PF('carDialog').show();"/>
+
+
+
+                    <p:dialog id="d1" header="Fechas de Hospitalización" widgetVar="carDialog" modal="false" showEffect="fade" hideEffect="fade" resizable="false" width="33%">
+                        <p:outputPanel id="carDetail" style="text-align:center;" layout="block">
+                            <p:panelGrid    columns="2" style="width: 25%;text-align: center" columnClasses="label,value">
+                                <p:outputLabel style="font-size: 11px;"  value="Mask1(dd/mm/yyyy):" />
+                                <p:calendar required="true" id="mask1"  style="font-size: 11px;"   value="#{hospitalizado.date1}" pattern="dd/MM/yyyy" mask="true" >
+                                    <f:ajax event="change" listener="#{hospitalizado.listen1(event)}"/>
+                                </p:calendar>
+                                <p:outputLabel style="font-size: 11px;"  value="Mask2(dd/mm/yyyy):" />
+                                <p:calendar  required="true" id="mask2" style="font-size: 11px;"   value="#{hospitalizado.date2}" pattern="dd/MM/yyyy" mask="true" >
+                                    <f:ajax event="change" listener="#{hospitalizado.listen2(event)}"/>
+                                </p:calendar>
+                            </p:panelGrid>
+                            <p:commandButton  update="@form" style="font-size: 11px;" actionListener="#{hospitalizado.click}"  value="Buscar"/>
+                        </p:outputPanel>
+                    </p:dialog>
+
+
+                    <p:dataTable id="tbl1" style="font-size: 13px;width: 75%"  value="#{hospitalizado.litaPermanencias}" var="item">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText style="font: sans-serif;font-size: x-small" value="DIAGNOSTICO"/>
+                            </f:facet>
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.ENFERMEDAD}"/>
+                        </p:column>
+                        <!--p:column>
+                            <f:facet name="header">
+                                <h:outputText style="font: sans-serif;font-size: x-small" value="BLOQUEADO"/>
+                            </f:facet>
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.BLOQUEADO}"/>
+                        </p:column-->
+                        <!--p:column>
+                            <f:facet name="header">
+                                <h:outputText style="font: sans-serif;font-size: x-small" value="CEDULA"/>
+                            </f:facet>
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.CEDULA}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText style="font: sans-serif;font-size: x-small" value="APELLIDO_PATERNO"/>
+                            </f:facet>
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.APELLIDO_PATERNO}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText style="font: sans-serif;font-size: x-small" value="PRIMER_NOMBRE"/>
+                            </f:facet>
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.PRIMER_NOMBRE}"/>
+                        </p:column-->
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText style="font: sans-serif;font-size: x-small" value="FECHA DE INGRESO"/>
+                            </f:facet>
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.FECHA_INGRESOs}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText style="font: sans-serif;font-size: x-small" value="FECHA DE ALTA"/>
+                            </f:facet>
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.FECHA_ALTAs}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText style="font: sans-serif;font-size: x-small" value="No DIAS"/>
+                            </f:facet>
+                            <h:outputText style="font: sans-serif;font-size: x-small" value="#{item.TOTAL_DIAS}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
