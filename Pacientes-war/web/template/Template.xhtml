@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>HOSPITAL DE ESPECIALIDADES DE LAS FUERZAS ARMADAS N1</title>
+                <link type="text/css" rel="stylesheet" href="/project/faces/javax.faces.resource/theme.css?ln=cupertino" />
+            </f:facet>
+        </h:head>
+        <h:body>
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north"    size="27%"  resizable="false" closable="true" collapsible="true">
+                    <center>
+
+                        <p:panel  style="background-color:#c2dfef;height: 90%;width: 90%;">
+                            <center>
+                                <p:graphicImage style="height: 75%;width: 75%"   url="/resources/images/banner_he_1.png"/>                              
+
+                            </center>
+                        </p:panel>
+                    </center>
+                </p:layoutUnit>
+
+                <ui:insert name="west">
+                    <p:layoutUnit position="west" size="13%" style="font-size: 13px;"      collapsible="false">
+
+                        <h:form id="formatemplatewest">
+                            <p:growl id="messages" showDetail="false"/>
+
+                            <p:menu style="font-size: 16px;color: #D20005;font-weight: bold " >
+                                <p:submenu label="Menú Pacientes">
+                                    <p:menuitem value="Actualizar Datos" style="font-size: 13px;" action="/ActualizarDatos/TemplateClientActDatos"  />
+                                    <p:menuitem value="Turnos Paciente" style="font-size: 13px;"   action="/HistorialTurno/HTurno" update="messages"  />
+                                    <p:menuitem value="Hospitalizaciones" style="font-size: 13px;" action="/ActualizarDatos/TemplateClientPacienteHospitalizado"  />
+                                    <p:menuitem value="Cobertura ISSFA" style="font-size: 13px;" action="/ActualizarDatos/TemplateClientDependientes"  />
+                                    <p:menuitem value="Comprobantes Electrónicos" style="font-size: 13px;" action="/Facturación/TemplateClientReporteFActuras"  />
+                                    <p:menuitem value="Certificados Médicos" style="font-size: 13px;" action="/Certificados/TemplateClientCertificadoMédico"  />
+                                    <p:menuitem value="Turnos de primera vez" style="font-size: 13px;" action="/citasProximas/TemplateClientProximasCitas"  />
+
+                                </p:submenu>
+
+                            </p:menu>
+                        </h:form>
+                    </p:layoutUnit>
+                </ui:insert>
+
+                <p:layoutUnit position="center">
+                    <center>
+                        <ui:insert name="emenu">
+                            <h:form id="formatemplatecenter">
+                                <h:panelGrid id="pg1" columns="10"  width="75%">
+                                    <p:menubar  style="font-size: 13px;">
+                                        <p:submenu  label="Número de Historia Clínica:#{pacienteJSFManagedBean.pacientes.numeroHc}"/>
+                                        <p:submenu  label="Cedula:#{pacienteJSFManagedBean.pacientes.cedula}"/>
+                                        <p:submenu  label="Usuario:#{pacienteJSFManagedBean.pacientes.primerNombre} #{pacienteJSFManagedBean.pacientes.apellidoPaterno} "/>
+                                        <p:submenu  label="Email:#{pacienteJSFManagedBean.pacientes.email}"/>
+                                    </p:menubar>
+                                    <p:commandLink id="actualizarDatos" action="/ActualizarDatos/TemplateClientActDatos" >
+                                        <p:graphicImage value="#{resource['images/icono5.png']}" style="width: 80px; height: 70px"/>
+                                        <p:effect type="pulsate" event="click" />
+                                    </p:commandLink>
+                                    <p:commandLink process="@form" update="@form" actionListener="#{pacienteJSFManagedBean.buttonAction(actionEvent)}"   >
+                                        <p:graphicImage value="#{resource['images/icono6.png']}" style="width: 80px; height: 70px"/>
+                                        <p:effect type="pulsate" event="click" />
+                                    </p:commandLink>
+                                    <p:commandLink action="#{pacienteJSFManagedBean.logout()}" >
+                                        <p:graphicImage value="#{resource['images/icono8.png']}" style="width: 80px; height: 70px"/>
+                                        <p:effect type="pulsate" event="click" />
+                                    </p:commandLink>
+                                </h:panelGrid>
+                            </h:form>
+                        </ui:insert>
+                        <ui:insert name="center"></ui:insert>
+                    </center>
+                    
+                    
+                </p:layoutUnit>
+            </p:layout>
+        </h:body>
+    </f:view>
+</html>
+

@@ -14,7 +14,7 @@ is divided into following sections:
   - cleanup
 
 -->
-<project xmlns:ear2="http://www.netbeans.org/ns/j2ee-earproject/2" basedir=".." default="default" name="Paciente-impl">
+<project xmlns:ear2="http://www.netbeans.org/ns/j2ee-earproject/2" basedir=".." default="default" name="Pacientes-impl">
     <import file="ant-deploy.xml"/>
     <fail message="Please build using Ant 1.7.1 or higher.">
         <condition>
@@ -205,7 +205,7 @@ exists or setup the property manually. For example like this:
             <property location="${build.dir}" name="dist.ear.dir"/>
             <property name="deploy.on.save" value="${build.deploy.on.save}"/>
         </ant>
-        <ant antfile="${project.Paciente-war}/build.xml" inheritall="false" target="dist-ear">
+        <ant antfile="${project.Pacientes-war}/build.xml" inheritall="false" target="dist-ear">
             <property location="${build.dir}" name="dist.ear.dir"/>
             <property name="deploy.on.save" value="${build.deploy.on.save}"/>
         </ant>
@@ -221,7 +221,7 @@ exists or setup the property manually. For example like this:
         </copy>
     </target>
     <target depends="init,deps-jar,pre-pre-compile,pre-compile" name="-do-compile-deps">
-        <copyfiles files="${reference.Paciente-war.dist-ear}" todir="${build.dir}//"/>
+        <copyfiles files="${reference.Pacientes-war.dist-ear}" todir="${build.dir}//"/>
         <copyfiles files="${reference.EJB_HE1.dist-ear}" todir="${build.dir}//"/>
     </target>
     <target name="post-compile">
@@ -300,7 +300,7 @@ exists or setup the property manually. For example like this:
     <target name="-run-deploy-am" unless="no.deps">
         <!-- Task to deploy to the Access Manager runtime. -->
         <ant antfile="${project.EJB_HE1}/build.xml" inheritall="false" target="-run-deploy-am"/>
-        <ant antfile="${project.Paciente-war}/build.xml" inheritall="false" target="-run-deploy-am"/>
+        <ant antfile="${project.Pacientes-war}/build.xml" inheritall="false" target="-run-deploy-am"/>
     </target>
     <target depends="-init-cos,dist-directory-deploy,pre-run-deploy,-pre-nbmodule-run-deploy,-run-deploy-nb,-init-deploy-ant,-deploy-ant,-run-deploy-am,-post-nbmodule-run-deploy,post-run-deploy" name="run-deploy"/>
     <target if="netbeans.home" name="-run-deploy-nb">
@@ -407,17 +407,17 @@ exists or setup the property manually. For example like this:
         <ear2:run-appclient subprojectname="${app.client}"/>
     </target>
     <target if="j2ee.appclient.mainclass.args" name="-as-retrieve-option-workaround" unless="j2ee.clientName">
-        <property name="client.jar" value="${dist.dir}/PacienteClient.jar"/>
+        <property name="client.jar" value="${dist.dir}/PacientesClient.jar"/>
         <sleep seconds="3"/>
-        <copy failonerror="false" file="${wa.copy.client.jar.from}/Paciente/PacienteClient.jar" todir="${dist.dir}"/>
+        <copy failonerror="false" file="${wa.copy.client.jar.from}/Pacientes/PacientesClient.jar" todir="${dist.dir}"/>
         <copy failonerror="false" flatten="true" todir="${dist.dir}/">
-            <fileset dir="${wa.copy.client.jar.from}/Paciente" includes="**/PacienteClient.jar"/>
+            <fileset dir="${wa.copy.client.jar.from}/Pacientes" includes="**/PacientesClient.jar"/>
         </copy>
-        <copy flatten="true" todir="${dist.dir}/PacienteClient">
-            <fileset dir="${wa.copy.client.jar.from}/Paciente" includes="**/*.*ar"/>
+        <copy flatten="true" todir="${dist.dir}/PacientesClient">
+            <fileset dir="${wa.copy.client.jar.from}/Pacientes" includes="**/*.*ar"/>
         </copy>
-        <copy failonerror="false" flatten="false" todir="${dist.dir}/PacienteClient">
-            <fileset dir="${dist.dir}/gfdeploy/Paciente" includes="**/*.jar"/>
+        <copy failonerror="false" flatten="false" todir="${dist.dir}/PacientesClient">
+            <fileset dir="${dist.dir}/gfdeploy/Pacientes" includes="**/*.jar"/>
         </copy>
     </target>
     <target depends="init" name="-init-run-macros">
@@ -629,15 +629,15 @@ exists or setup the property manually. For example like this:
             <property location="${build.dir}" name="dist.ear.dir"/>
             <property name="deploy.on.save" value="${build.deploy.on.save}"/>
         </ant>
-        <ant antfile="${project.Paciente-war}/build.xml" inheritall="false" target="clean-ear">
+        <ant antfile="${project.Pacientes-war}/build.xml" inheritall="false" target="clean-ear">
             <property location="${build.dir}" name="dist.ear.dir"/>
             <property name="deploy.on.save" value="${build.deploy.on.save}"/>
         </ant>
     </target>
     <target depends="init" name="do-clean">
         <delete dir="${build.dir}"/>
-        <delete dir="${dist.dir}"/>
-        <delete dir="${build.dir}"/>
+        
+      
     </target>
     <target depends="init" if="netbeans.home" name="undeploy-clean">
         <nbundeploy failOnError="false" startServer="false"/>

@@ -3,12 +3,12 @@
     <type>org.netbeans.modules.j2ee.earproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/j2ee-earproject/2">
-            <name>Paciente</name>
+            <name>Pacientes</name>
             <minimum-ant-version>1.6.5</minimum-ant-version>
             <web-module-libraries/>
             <web-module-additional-libraries>
                 <library>
-                    <file>${reference.Paciente-war.dist-ear}</file>
+                    <file>${reference.Pacientes-war.dist-ear}</file>
                     <path-in-war>/</path-in-war>
                 </library>
                 <library>
@@ -27,7 +27,7 @@
                 <id>dist-ear</id>
             </reference>
             <reference>
-                <foreign-project>Paciente-war</foreign-project>
+                <foreign-project>Pacientes-war</foreign-project>
                 <artifact-type>j2ee_ear_archive</artifact-type>
                 <script>build.xml</script>
                 <target>dist-ear</target>
